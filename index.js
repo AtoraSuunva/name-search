@@ -48,13 +48,18 @@ var results = 0;
 var filesSearched = 0;
 for (file of files) {
 	try {
-		var fileName = file.match(/(.*)\/(.*)$/)[2] || file;
+		file = file.split('/'); //Split it to get the seperate directories
+		var fileName = file.pop(); //grab the file name 
 		if (fileName.search(regex) !== -1) {
 			results++;
-			if (!flags.includes('d')) fs.linkSync(path.join(folderToSearch, file), path.join(resultsFolder, fileName));
+			if (!flags.includes('d')) {
+				fs.linkSync(path.join('.', ...file, fileName), path.join(resultsFolder, fileName));
+				//holy shit spread syntax in the wild!
+			}
 		}
-	} catch (e) {if (!flags.includes('f')) console.log(`Couldn\'t link file/directory "${file}"`)}
+	} catch (e) {console.log(e)/*if (!flags.includes('f')) process.stdout.write(`Couldn\'t link file/directory "${file}"`)*/}
 	filesSearched++;
+	process.stdout.cursorTo(0);
 	process.stdout.write(loadingBar(filesSearched, files.length, process.stdout.columns - 8));
 	process.stdout.cursorTo(0);
 }
