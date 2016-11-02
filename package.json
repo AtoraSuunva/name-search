@@ -1,0 +1,18 @@
+{
+  "name": "name-search",
+  "version": "0.2.1",
+  "description": "Searches files for things in their name and dumps them in a folder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "search", "recursive", "horrible code", "file name"
+  ],
+  "author": "AtlasTheBot",
+  "license": "ISC",
+  "dependencies": {},
+  "bin": {
+   "nsearch": "./index.js"
+ }
+}
