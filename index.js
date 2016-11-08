@@ -66,15 +66,18 @@ for (file of files) {
 		file = file.split('/'); //Split it to get the seperate directories
 		var fileName = file.pop(); //grab the file name
 		var regexMatch = fileName.search(regex) !== -1;
-		if (flags.includes('v')) console.log(`File name is ${fileName}, file is ${file}`);
+		if (flags.includes('v')) console.log(`File name is ${fileName}, file is at ${file.join('/')}`);
 		if (flags.includes('v')) console.log(`Regex match? ${regexMatch}`);
 		if (regexMatch) {
-			var isDirectory = fs.statSync(path.join(folderToSearch, ...file, fileName)).isDirectory();
+			var isDirectory = fs.statSync(path.join((flags.includes('r')?'':folderToSearch), ...file, fileName)).isDirectory();
 			if (flags.includes('v')) console.log(`Directory? ${isDirectory}`);
+			
 			if (!isDirectory) {
 				results++;
-				if (!flags.includes('d')) fs.linkSync(path.join(folderToSearch, ...file, fileName), path.join(resultsFolder, fileName));
-				if ( flags.includes('v')) console.log(`Linking ${path.join(folderToSearch, ...file, fileName)} to ${path.join(resultsFolder, fileName)}`);
+				if (!flags.includes('d')) {
+					fs.linkSync(path.join((flags.includes('r')?'':folderToSearch), ...file, fileName), path.join(resultsFolder, fileName));
+				}
+				if ( flags.includes('v')) console.log(`Linking ${path.join((flags.includes('r')?'':folderToSearch), ...file, fileName)} to ${path.join(resultsFolder, fileName)}`);
 				//holy shit spread syntax in the wild!
 			}
 		}

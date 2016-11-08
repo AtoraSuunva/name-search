@@ -4,10 +4,13 @@ Search a directory for files that match a regex and copies them to a directory c
 
 ```
 nsearch [-qdfr] "directory/to/search" "some|(regex)"
+
 -q: Quiet mode, don't output anything
+-v: Verbose, log lots of things
 -d: Dry run, don't save to a directory (Can be used to count the amount of matches)
 -f: Silence errors
 -r: Recursive Search, search subdirectories of the directory
+--version: View current version
 ```
 
 ## Installation

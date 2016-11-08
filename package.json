@@ -1,6 +1,6 @@
 {
   "name": "name-search",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Searches files for things in their name and dumps them in a folder",
   "main": "index.js",
   "scripts": {
